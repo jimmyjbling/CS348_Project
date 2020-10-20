@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>BaGS</title>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-inverse">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="http://jimmyjbling.pythonanywhere.com/">Home</a>
+              <a class="navbar-brand" href="http://jimmyjbling.pythonanywhere.com/edit/">Edit</a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="container">
+
+            <form action="" method="post" role="form">
+                    {{ form.csrf }}
+                <div class="form-group">
+                    <label for="name">Player Name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+
+                    <label for="team">Current Team:</label>
+                    <input type="text" class="form-control" id="team" name="team">
+
+                    <label for="position">Position:</label>
+                    <input type="text" class="form-control" id="position" name="position">
+
+                    <label for="hand">Dominant Hand:</label>
+                    <input type="text" class="form-control" id="hand" name="hand">
+
+                    <label for="bat_avg">Batting Average:</label>
+                    <input type="text" class="form-control" id="bat_avg" name="bat_avg">
+
+                    <label for="obi">On Base Percentage:</label>
+                    <input type="text" class="form-control" id="obi" name="obi">
+
+                    <label for="slug">Slug Percentage:</label>
+                    <input type="text" class="form-control" id="slug" name="slug">
+
+                    <label for="strike">Number of Strikeouts:</label>
+                    <input type="text" class="form-control" id="strike" name="strike">
+
+                </div>
+                <button type="submit" class="btn btn-success">Sign Up</button>
+                </form>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+
+                      {% for message in messages %}
+                    {% if "Error" not in message[1]: %}
+                        <div class="alert alert-info">
+                        <strong>Success! </strong> {{ message[1] }}
+                        </div>
+                    {% endif %}
+
+                    {% if "Error" in message[1]: %}
+                        <div class="alert alert-danger">
+                        <strong></strong> {{ message[1] }}
+                        </div>
+                    {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                </div>
+
+        </div><!-- /.container -->
+
+    </body>
+</html>
