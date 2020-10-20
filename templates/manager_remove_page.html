@@ -1,6 +1,4 @@
 <html>
-
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,10 +32,38 @@
         </nav>
 
         <div class="container">
-            <h4>Choose if you want to add new info, delete existing info, or update existing info</h4>
-          <a href="http://jimmyjbling.pythonanywhere.com/edit/add" button type="button" class="btn btn-link">Add</button>
-          <a href="http://jimmyjbling.pythonanywhere.com/edit/remove" button type="button" class="btn btn-link">Delete</button>
-          <a href="http://jimmyjbling.pythonanywhere.com/edit/update" button type="button" class="btn btn-link">Update</button>
+
+            <form action="" method="post" role="form">
+                <div class="form-group">
+                    <label for="manid">Manaager ID:</label>
+                    <input type="text" class="form-control" id="manid" name="manid">
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-success">Delete</button>
+                </div>
+                </form>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+
+                      {% for message in messages %}
+                    {% if "Error" not in message[1]: %}
+                        <div class="alert alert-info">
+                        <strong>Success! </strong> {{ message[1] }}
+                        </div>
+                    {% endif %}
+
+                    {% if "Error" in message[1]: %}
+                        <div class="alert alert-danger">
+                        <strong></strong> {{ message[1] }}
+                        </div>
+                    {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <a href="http://jimmyjbling.pythonanywhere.com/edit/add" button type="button" class="btn btn-link">Go Back</button>
+                </div>
+
         </div><!-- /.container -->
+
     </body>
 </html>

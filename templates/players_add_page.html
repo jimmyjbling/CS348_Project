@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>BaGS</title>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-inverse">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="http://jimmyjbling.pythonanywhere.com/">Home</a>
+              <a class="navbar-brand" href="http://jimmyjbling.pythonanywhere.com/edit/">Edit</a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="container">
+
+            <form action="" method="post" role="form">
+                    {{ form.csrf }}
+                <div class="form-group">
+                    <label for="name">Player Name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+
+                <p>Dominant Hand</p>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                   <label for="hand" class="btn btn-secondary active">
+                   <input type="radio" name="hand" id="left" value="R" autocomplete="off" checked> Right
+                   </label>
+
+                   <label for="hand" class="btn btn-secondary">
+                   <input type="radio" name="hand" id="right" value="L" autocomplete="off"> Left
+                   </label>
+                </div>
+
+                <div class="form-group">
+
+                    <label for="bat_avg">Batting Average:</label>
+                    <input type="text" class="form-control" id="bat_avg" name="bat_avg">
+
+                    <label for="obi">On Base Percentage:</label>
+                    <input type="text" class="form-control" id="obi" name="obi">
+
+                    <label for="slug">Slug Percentage:</label>
+                    <input type="text" class="form-control" id="slug" name="slug">
+
+                    <label for="strike">Number of Strikeouts:</label>
+                    <input type="text" class="form-control" id="strike" name="strike">
+
+                </div>
+                <h3>Add player to team (optional)</h3>
+                <p>Position:</p>
+                <select class="browser-default custom-select" id="position" name="position">
+                  <option value="" selected>Select position</option>
+                  <option value="P">Pitcher</option>
+                  <option value="C">Catcher</option>
+                  <option value="1B">First Base</option>
+                  <option value="2B">Second Base</option>
+                  <option value="3B">Third Base</option>
+                  <option value="SS">Short Stop</option>
+                  <option value="LF">Left Field</option>
+                  <option value="CF">Center Field</option>
+                  <option value="RF">Right Field</option>
+
+                </select>
+
+                <p>Team:</p>
+                <select class="browser-default custom-select" id="team" name="team">
+                  <option value="" selected>Select team</option>
+                  {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                  {% endfor %}
+                </select>
+                <div class="form-group">
+                    <label for="salary">Salary:</label>
+                    <input type="text" class="form-control" id="salary" name="salary">
+                </div>
+                <div class="row">
+                    <p><br></p>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-success">Add</button>
+                </div>
+                </form>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+
+                      {% for message in messages %}
+                    {% if "Error" not in message[1]: %}
+                        <div class="alert alert-info">
+                        <strong>Success! </strong> {{ message[1] }}
+                        </div>
+                    {% endif %}
+
+                    {% if "Error" in message[1]: %}
+                        <div class="alert alert-danger">
+                        <strong></strong> {{ message[1] }}
+                        </div>
+                    {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <a href="http://jimmyjbling.pythonanywhere.com/edit/add" button type="button" class="btn btn-link">Go Back</button>
+                </div>
+
+        </div><!-- /.container -->
+
+    </body>
+</html>
