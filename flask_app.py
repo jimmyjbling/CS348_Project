@@ -61,13 +61,21 @@ def view_index():
 @app.route("/edit/add/player/", methods=['GET', 'POST'])
 def add_player():
     form = PlayerForm(request.form)
+    cnx = mysql.connector.connect(
+        user='jimmyjbling',
+        password='cs348project',
+        host='jimmyjbling.mysql.pythonanywhere-services.com',
+        database='jimmyjbling$baseball'
+    )
 
+    cursor = cnx.cursor()
     cursor.execute("SELECT TeamId from team")
     teams = cursor.fetchall()
     teams = [t[0] for t in teams]
 
     # GETS THE RESULTS OF THE FORM FROM USER #
     if request.method == 'POST':
+
         player_name=request.form['name']
         team=request.form['team']
         position=request.form['position']
@@ -204,6 +212,14 @@ def add_player():
 
 @app.route("/edit/update/player/", methods=['GET', 'POST'])
 def update_player():
+    cnx = mysql.connector.connect(
+        user='jimmyjbling',
+        password='cs348project',
+        host='jimmyjbling.mysql.pythonanywhere-services.com',
+        database='jimmyjbling$baseball'
+    )
+
+    cursor = cnx.cursor()
     form = PlayerForm(request.form)
 
     cursor.execute("SELECT TeamId from team")
@@ -217,6 +233,8 @@ def update_player():
     # BUILD UPDATE FORM AND GET RESULTS FROM USER #
 
     if request.method == 'POST':
+
+
         playerid=request.form['playerid']
         player_name=request.form['name']
         team=request.form['team']
@@ -393,6 +411,14 @@ def update_player():
 
 @app.route('/edit/remove/player/', methods=["GET", "POST"])
 def remove_player_index():
+    cnx = mysql.connector.connect(
+        user='jimmyjbling',
+        password='cs348project',
+        host='jimmyjbling.mysql.pythonanywhere-services.com',
+        database='jimmyjbling$baseball'
+    )
+
+    cursor = cnx.cursor()
     form = PlayerForm(request.form)
 
     cursor.execute("SELECT TeamId from team")
@@ -462,6 +488,14 @@ def remove_player_index():
 
 @app.route("/edit/add/coach/", methods=['GET', 'POST'])
 def add_coach():
+    cnx = mysql.connector.connect(
+        user='jimmyjbling',
+        password='cs348project',
+        host='jimmyjbling.mysql.pythonanywhere-services.com',
+        database='jimmyjbling$baseball'
+    )
+
+    cursor = cnx.cursor()
     cursor.execute("SELECT TeamId from team")
     teams = cursor.fetchall()
     teams = [t[0] for t in teams]
@@ -548,6 +582,14 @@ def add_coach():
 
 @app.route("/edit/update/coach/", methods=['GET', 'POST'])
 def update_coach():
+    cnx = mysql.connector.connect(
+        user='jimmyjbling',
+        password='cs348project',
+        host='jimmyjbling.mysql.pythonanywhere-services.com',
+        database='jimmyjbling$baseball'
+    )
+
+    cursor = cnx.cursor()
     cursor.execute("SELECT TeamId from team")
     teams = cursor.fetchall()
     teams = [t[0] for t in teams]
@@ -680,6 +722,14 @@ def update_coach():
 
 @app.route('/edit/remove/coach/', methods=["GET", "POST"])
 def remove_coach_index():
+    cnx = mysql.connector.connect(
+        user='jimmyjbling',
+        password='cs348project',
+        host='jimmyjbling.mysql.pythonanywhere-services.com',
+        database='jimmyjbling$baseball'
+    )
+
+    cursor = cnx.cursor()
     cursor.execute("SELECT TeamId from team")
     teams = cursor.fetchall()
     teams = [t[0] for t in teams]
@@ -750,6 +800,14 @@ def remove_coach_index():
 
 @app.route("/edit/add/team/", methods=['GET', 'POST'])
 def add_team():
+    cnx = mysql.connector.connect(
+        user='jimmyjbling',
+        password='cs348project',
+        host='jimmyjbling.mysql.pythonanywhere-services.com',
+        database='jimmyjbling$baseball'
+    )
+
+    cursor = cnx.cursor()
     cursor.execute("SELECT TeamId from team")
     teams = cursor.fetchall()
     teams = [t[0] for t in teams]
@@ -786,6 +844,14 @@ def add_team():
 
 @app.route("/edit/update/team/", methods=['GET', 'POST'])
 def update_team():
+    cnx = mysql.connector.connect(
+        user='jimmyjbling',
+        password='cs348project',
+        host='jimmyjbling.mysql.pythonanywhere-services.com',
+        database='jimmyjbling$baseball'
+    )
+
+    cursor = cnx.cursor()
     cursor.execute("SELECT TeamId from team")
     teams = cursor.fetchall()
     teams = [t[0] for t in teams]
@@ -828,6 +894,14 @@ def update_team():
 
 @app.route("/edit/remove/team/", methods=['GET', 'POST'])
 def delete_team():
+    cnx = mysql.connector.connect(
+        user='jimmyjbling',
+        password='cs348project',
+        host='jimmyjbling.mysql.pythonanywhere-services.com',
+        database='jimmyjbling$baseball'
+    )
+
+    cursor = cnx.cursor()
     cursor.execute("SELECT TeamId from team")
     teams = cursor.fetchall()
     teams = [t[0] for t in teams]
@@ -891,6 +965,14 @@ def delete_team():
 
 @app.route("/edit/add/manager/", methods=['GET', 'POST'])
 def add_manager():
+    cnx = mysql.connector.connect(
+        user='jimmyjbling',
+        password='cs348project',
+        host='jimmyjbling.mysql.pythonanywhere-services.com',
+        database='jimmyjbling$baseball'
+    )
+
+    cursor = cnx.cursor()
     cursor.execute("SELECT TeamId from team")
     teams = cursor.fetchall()
     teams = [t[0] for t in teams]
@@ -961,6 +1043,14 @@ def add_manager():
 
 @app.route("/edit/update/manager/", methods=['GET', 'POST'])
 def update_manager():
+    cnx = mysql.connector.connect(
+        user='jimmyjbling',
+        password='cs348project',
+        host='jimmyjbling.mysql.pythonanywhere-services.com',
+        database='jimmyjbling$baseball'
+    )
+
+    cursor = cnx.cursor()
     cursor.execute("SELECT TeamId from team")
     teams = cursor.fetchall()
     teams = [t[0] for t in teams]
@@ -1065,6 +1155,14 @@ def update_manager():
 
 @app.route('/edit/remove/manager/', methods=["GET", "POST"])
 def remove_manager_index():
+    cnx = mysql.connector.connect(
+        user='jimmyjbling',
+        password='cs348project',
+        host='jimmyjbling.mysql.pythonanywhere-services.com',
+        database='jimmyjbling$baseball'
+    )
+
+    cursor = cnx.cursor()
     cursor.execute("SELECT TeamId from team")
     teams = cursor.fetchall()
     teams = [t[0] for t in teams]
