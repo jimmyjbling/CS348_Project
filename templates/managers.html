@@ -24,9 +24,8 @@
             right: 15px;
             border: 3px solid #f1f1f1;
             z-index: 9;
-          }
-
-          .form-container .cancel {
+        }   
+        .form-container .cancel {
             background-color: red;
         }
 
@@ -36,94 +35,101 @@
     <body>
       <div class="topnav">
         <a href="http://jimmyjbling.pythonanywhere.com/">Home</a>
-        <a class="active" href="http://jimmyjbling.pythonanywhere.com/edit/">Teams</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/edit/">Teams</a>
         <a href="http://jimmyjbling.pythonanywhere.com/edit/">Players</a>
-        <a href="http://jimmyjbling.pythonanywhere.com/edit/">Managers</a>
+        <a class="active" href="http://jimmyjbling.pythonanywhere.com/edit/">Managers</a>
         <a href="http://jimmyjbling.pythonanywhere.com/edit/">Coaches</a>
         <a href="http://jimmyjbling.pythonanywhere.com/edit/">Games</a>
       </div>
 
         <div class="container">
-          <h1>Add, Update or Delete a Team</h1>
-          <h5> View the rundown on all the teams in the league. Team personnel and win percentage is taken into account to predict the performance. Make changes to the team roster and coaches as well as home stadium on this page.</h5>
-          <img src="https://cdn.wallpapersafari.com/90/1/o85q0Y.png" class="img-fluid" alt="Responsive image">
+          <h1>Add, Update or Delete a Manager</h1>
+          <h5>All the managers in the league can be found here. Manager info and stats can be edited using this page. The simulator takes manager win percentages as a metric to predict the result of a game.</h5>
+          <img src="https://cdn.vox-cdn.com/thumbor/EWAA0BG-zuz5G_rRR1VlNWf00HU=/0x0:3059x2123/1200x800/filters:focal(1848x898:2336x1386)/cdn.vox-cdn.com/uploads/chorus_image/image/65732202/1158921789.jpg.0.jpg"  class="img-fluid" alt="Responsive image">
           
-          <button type="button" class="btn btn-secondary" onclick="openUpdateForm()">Update Team</button>
-          <button type="button" class="btn btn-primary" onclick="openAddForm()">Add New Team</button>
-          <button type="button" class="btn btn-danger" onclick="openDeleteForm()">Delete Team</button>
+          <button type="button" class="btn btn-secondary" onclick="openUpdateForm()">Update Manager</button>
+          <button type="button" class="btn btn-primary" onclick="openAddForm()">Add New Manager</button>
+          <button type="button" class="btn btn-danger" onclick="openDeleteForm()">Delete Manager</button>
           
          
         </div><!-- /.container -->
 
         <div class="form-popup" id="myUpdateForm">
             <form action="" method="post" role="form" class="form-container">
-                <p>Team ID:</p>
-                <select class="browser-default custom-select" id="teamid" name="teamid">
+                <div class="form-group">
+                    <label for="manid">Manager ID:</label>
+                    <input type="text" class="form-control" id="manid" name="manid">
+
+                    <label for="name">Manaager name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+
+                <h3>Add manager to team (optional)</h3>
+                <p>Team:</p>
+                <select class="browser-default custom-select" id="team" name="team">
                   <option value="" selected>Select team</option>
                   {% for team in teams %}
                     <option value="{{ team }}">{{ team }}</option>
                   {% endfor %}
                 </select>
                 <div class="form-group">
-                    <label for="name">Team name:</label>
-                    <input type="text" class="form-control" id="name" name="name">
-
-                    <label for="stadium">Name of stadium:</label>
-                    <input type="text" class="form-control" id="stadium" name="stadium">
-
-                    <label for="mascot">Name of mascot:</label>
-                    <input type="text" class="form-control" id="mascot" name="mascot">
+                    <label for="salary">Salary:</label>
+                    <input type="text" class="form-control" id="salary" name="salary">
                 </div>
+                <div class="row">
+                    <p><br></p>
+                </div>
+
                 <div class="row">
                     <button type="submit" class="btn btn-success">Update</button>
                     <button type="button" class="btn cancel" onclick="closeUpdateForm()">Close</button>
                 </div>
                 </form>
-                </div>
         </div><!-- /.container -->
         
         <div class="form-popup" id="myAddForm">
 
-          <form action="" method="post" role="form" class="form-container">
-              <div class="form-group">
-                  <label for="teamid">Team 3-letter abbreviation (must be unique to Team):</label>
-                  <input type="text" class="form-control" id="teamid" name="teamid">
+            <form action="" method="post" role="form" class="form-container">
+                <div class="form-group">
+                    <label for="name">Manager name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
 
-                  <label for="name">Team name:</label>
-                  <input type="text" class="form-control" id="name" name="name">
+                <h3>Add manager to team (optional)</h3>
+                <p>Team:</p>
+                <select class="browser-default custom-select" id="team" name="team">
+                  <option value="" selected>Select team</option>
+                  {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                  {% endfor %}
+                </select>
+                <div class="form-group">
+                    <label for="salary">Salary:</label>
+                    <input type="text" class="form-control" id="salary" name="salary">
+                </div>
+                <div class="row">
+                    <p><br></p>
+                </div>
 
-                  <label for="stadium">Name of stadium:</label>
-                  <input type="text" class="form-control" id="stadium" name="stadium">
-
-                  <label for="mascot">Name of mascot:</label>
-                  <input type="text" class="form-control" id="mascot" name="mascot">
-              </div>
-
-              <div class="row">
-                  <button type="submit" class="btn btn-success">Add</button>
-                  <button type="button" class="btn cancel" onclick="closeAddForm()">Close</button>
-              </div>
-              </form>
-             
-              </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-success">Add</button>
+                    <button type="button" class="btn cancel" onclick="closeAddForm()">Close</button>
+                </div>
+                </form>
 
       </div><!-- /.container -->
-      <div class="form-popup" id="myDeleteForm" class="form-container">
+      <div class="form-popup" id="myDeleteForm">
 
-        <form action="" method="post" role="form">
-            <p>Team ID:</p>
-            <select class="browser-default custom-select" id="teamid" name="teamid">
-              <option value="" selected>Select team</option>
-              {% for team in teams %}
-                <option value="{{ team }}">{{ team }}</option>
-              {% endfor %}
-            </select>
+        <form action="" method="post" role="form" class="form-container">
+            <div class="form-group">
+                <label for="manid">Manager ID:</label>
+                <input type="text" class="form-control" id="manid" name="manid">
+            </div>
             <div class="row">
                 <button type="submit" class="btn btn-success">Delete</button>
                 <button type="button" class="btn cancel" onclick="closeDeleteForm()">Close</button>
             </div>
             </form>
-            </div>
 
     </div><!-- /.container -->
       

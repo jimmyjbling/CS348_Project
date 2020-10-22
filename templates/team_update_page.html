@@ -55,25 +55,7 @@
                     <button type="submit" class="btn btn-success">Update</button>
                 </div>
                 </form>
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-
-                      {% for message in messages %}
-                    {% if "Error" not in message[1]: %}
-                        <div class="alert alert-info">
-                        <strong>Success! </strong> {{ message[1] }}
-                        </div>
-                    {% endif %}
-
-                    {% if "Error" in message[1]: %}
-                        <div class="alert alert-danger">
-                        <strong></strong> {{ message[1] }}
-                        </div>
-                    {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                {% endwith %}
-                <a href="http://jimmyjbling.pythonanywhere.com/edit/update" button type="button" class="btn btn-link">Go Back</button>
+                
                 </div>
 
         </div><!-- /.container -->

@@ -1,0 +1,181 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="main_page.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>BaGS</title>
+        <style>
+          .form-popup {
+            background-color: white;
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+          }
+
+          .form-container .cancel {
+            background-color: red;
+        }
+        </style>
+    </head>
+
+    <body>
+      <div class="topnav">
+        <a href="http://jimmyjbling.pythonanywhere.com/">Home</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/edit/">Teams</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/edit/">Players</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/edit/">Managers</a>
+        <a class="active" href="http://jimmyjbling.pythonanywhere.com/edit/">Coaches</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/edit/">Games</a>
+      </div>
+
+        <div class="container">
+          <h1>Add, Update or Delete a Coach</h1>
+          <h5>The men behind the scenes play a significant role in shaping a team. The simulator takes into account the record of a coach in the team's success in predicting the outcomes of games. Add a new coach, update an existing coach record or delete a coach record on this page </h5>
+          <img src="https://bloximages.chicago2.vip.townnews.com/madison.com/content/tncms/assets/v3/editorial/5/85/585b4816-126b-5abe-b066-1c1c64f6a63f/5e9f751a4c977.image.jpg?resize=1200%2C800" class="img-fluid" alt="Responsive image">
+          
+          <button type="button" class="btn btn-secondary" onclick="openUpdateForm()">Update A Coach</button>
+          <button type="button" class="btn btn-primary" onclick="openAddForm()">Add New Coach</button>
+          <button type="button" class="btn btn-danger" onclick="openDeleteForm()">Delete A Coach</button>
+          
+         
+        </div><!-- /.container -->
+
+        <div class="form-popup" id="myUpdateForm">
+            <form action="" method="post" role="form" class="form-container">
+                <div class="form-group">
+                    <label for="coachid">Coach ID:</label>
+                    <input type="text" class="form-control" id="coachid" name="coachid">
+
+                    <label for="name">Coach name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+
+                <h3>Add coach to team (optional)</h3>
+                <p>Position:</p>
+                <select class="browser-default custom-select" id="position" name="position">
+                  <option value="" selected>Select position</option>
+                  <option value="P">Pitcher</option>
+                  <option value="C">Catcher</option>
+                  <option value="1B">First Base</option>
+                  <option value="3B">Third Base</option>
+
+                </select>
+
+                <p>Team:</p>
+                <select class="browser-default custom-select" id="team" name="team">
+                  <option value="" selected>Select team</option>
+                  {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                  {% endfor %}
+                </select>
+                <div class="form-group">
+                    <label for="salary">Salary:</label>
+                    <input type="text" class="form-control" id="salary" name="salary">
+                </div>
+                <div class="row">
+                    <p><br></p>
+                </div>
+
+                <div class="row">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="button" class="btn cancel" onclick="closeUpdateForm()">Close</button>
+                </div>
+                </form>
+        </div><!-- /.container -->
+        
+        <div class="form-popup" id="myAddForm">
+
+            <form action="" method="post" role="form">
+                <div class="form-group">
+                    <label for="name">Coach name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+
+                <h3>Add coach to team (optional)</h3>
+                <p>Position:</p>
+                <select class="browser-default custom-select" id="position" name="position">
+                  <option value="" selected>Select position</option>
+                  <option value="P">Pitcher</option>
+                  <option value="C">Catcher</option>
+                  <option value="1B">First Base</option>
+                  <option value="3B">Third Base</option>
+
+                </select>
+
+                <p>Team:</p>
+                <select class="browser-default custom-select" id="team" name="team">
+                  <option value="" selected>Select team</option>
+                  {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                  {% endfor %}
+                </select>
+                <div class="form-group">
+                    <label for="salary">Salary:</label>
+                    <input type="text" class="form-control" id="salary" name="salary">
+                </div>
+                <div class="row">
+                    <p><br></p>
+                </div>
+
+                <div class="row">
+                    <button type="submit" class="btn btn-success">Add</button>
+                    <button type="button" class="btn cancel" onclick="closeAddForm()">Close</button>
+                </div>
+                </form>
+
+      </div><!-- /.container -->
+      <div class="form-popup" id="myDeleteForm">
+
+        <form action="" method="post" role="form">
+            <div class="form-group">
+                <label for="coachid">Coach ID:</label>
+                <input type="text" class="form-control" id="coachid" name="coachid">
+            </div>
+
+            <div class="row">
+                <button type="submit" class="btn btn-success">Remove</button>
+                <button type="button" class="btn cancel" onclick="closeDeleteForm()">Close</button>
+            </div>
+            </form>
+
+    </div><!-- /.container -->
+      
+
+    <script>
+      function openUpdateForm() {
+        document.getElementById("myUpdateForm").style.display = "block";
+      }
+      
+      function closeUpdateForm() {
+        document.getElementById("myUpdateForm").style.display = "none";
+      }
+
+      function openAddForm() {
+        document.getElementById("myAddForm").style.display = "block";
+      }
+      
+      function closeAddForm() {
+        document.getElementById("myAddForm").style.display = "none";
+      }
+      function openDeleteForm() {
+        document.getElementById("myDeleteForm").style.display = "block";
+      }
+      
+      function closeDeleteForm() {
+        document.getElementById("myDeleteForm").style.display = "none";
+      }
+      </script>
+    </body>
+</html>
