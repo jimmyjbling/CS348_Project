@@ -1,0 +1,69 @@
+<html>
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/main_page.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>BaGS</title>
+        <style>
+          .form-popup {
+            background-color: white;
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+          }
+
+          .form-container .cancel {
+            background-color: red;
+        }
+
+        </style>
+    </head>
+
+    <body>
+      <div class="topnav">
+        <a href="http://jimmyjbling.pythonanywhere.com/">Home</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/teams/">Teams</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/players/">Players</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/managers/">Managers</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/coaches/">Coaches</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/games/">Games</a>
+        <a class="active" href="http://jimmyjbling.pythonanywhere.com/rooster/">Roosters</a>
+      </div>
+
+        <div class="container">
+          <h1>View team roosters</h1>
+          <h5> View the rundown on all the teams in the league.</h5>
+
+
+        </div><!-- /.container -->
+
+        <div class="container" id="whichteam">
+            <form action="" method="post" role="form" class="form-container">
+                <p>Team ID:</p>
+                <select class="browser-default custom-select" id="teamid" name="teamid">
+                  <option value="" selected>Select team</option>
+                  {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                  {% endfor %}
+                </select>
+                    <button type="submit" class="btn btn-success" name="rooster" id="rooster">Get Rooster</button>
+                </div>
+                </form>
+                </div>
+        </div><!-- /.container -->
+    </body>
+</html>

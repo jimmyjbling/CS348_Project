@@ -1,0 +1,163 @@
+<html>
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/main_page.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>BaGS</title>
+        <style>
+          .form-popup {
+            background-color: white;
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+          }
+
+          .form-container .cancel {
+            background-color: red;
+        }
+
+        </style>
+    </head>
+
+    <body>
+      <div class="topnav">
+        <a href="http://jimmyjbling.pythonanywhere.com/">Home</a>
+        <a class = "active" href="http://jimmyjbling.pythonanywhere.com/teams/">Teams</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/players/">Players</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/managers/">Managers</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/coaches/">Coaches</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/games/">Games</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/rooster/">Roosters</a>
+      </div>
+
+        <div class="container">
+          <h1>Add, Update or Delete a Team</h1>
+          <h5> View the rundown on all the teams in the league. Team personnel and win percentage is taken into account to predict the performance. Make changes to the team roster and coaches as well as home stadium on this page.</h5>
+          <img src="https://cdn.wallpapersafari.com/90/1/o85q0Y.png" class="img-fluid" alt="Responsive image">
+
+          <button type="button" class="btn btn-secondary" onclick="openUpdateForm()">Update Team</button>
+          <button type="button" class="btn btn-primary" onclick="openAddForm()">Add New Team</button>
+          <button type="button" class="btn btn-danger" onclick="openDeleteForm()">Delete Team</button>
+
+
+        </div><!-- /.container -->
+
+        <div class="container" id="myUpdateForm" style="display: none">
+            <form action="" method="post" role="form" class="form-container">
+                <p>Team ID:</p>
+                <select class="browser-default custom-select" id="teamid" name="teamid">
+                  <option value="" selected>Select team</option>
+                  {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                  {% endfor %}
+                </select>
+                <div class="form-group">
+                    <label for="name">Team name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+
+                    <label for="stadium">Name of stadium:</label>
+                    <input type="text" class="form-control" id="stadium" name="stadium">
+
+                    <label for="mascot">Name of mascot:</label>
+                    <input type="text" class="form-control" id="mascot" name="mascot">
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-success" name="form_update" id="form_update">Update</button>
+                    <button type="button" class="btn cancel" onclick="closeUpdateForm()">Close</button>
+                </div>
+                </form>
+                </div>
+        </div><!-- /.container -->
+
+        <div class="container" id="myAddForm" style="display: none">
+
+          <form action="" method="post" role="form" class="form-container">
+              <div class="form-group">
+                  <label for="teamid">Team 3-letter abbreviation (must be unique to Team):</label>
+                  <input type="text" class="form-control" id="teamid" name="teamid">
+
+                  <label for="name">Team name:</label>
+                  <input type="text" class="form-control" id="name" name="name">
+
+                  <label for="stadium">Name of stadium:</label>
+                  <input type="text" class="form-control" id="stadium" name="stadium">
+
+                  <label for="mascot">Name of mascot:</label>
+                  <input type="text" class="form-control" id="mascot" name="mascot">
+              </div>
+
+              <div class="row">
+                  <button type="submit" class="btn btn-success" name="form_add" id="form_add">Add</button>
+                  <button type="button" class="btn cancel" onclick="closeAddForm()">Close</button>
+              </div>
+              </form>
+
+              </div>
+
+      </div><!-- /.container -->
+      <div class="container" id="myDeleteForm" style="display: none">
+
+        <form action="" method="post" role="form">
+            <p>Team ID:</p>
+            <select class="browser-default custom-select" id="teamid" name="teamid">
+              <option value="" selected>Select team</option>
+              {% for team in teams %}
+                <option value="{{ team }}">{{ team }}</option>
+              {% endfor %}
+            </select>
+            <div class="row">
+                <button type="submit" class="btn btn-success" name="form_remove" id="form_remove">Delete</button>
+                <button type="button" class="btn cancel" onclick="closeDeleteForm()">Close</button>
+            </div>
+            </form>
+            </div>
+
+    </div><!-- /.container -->
+
+
+    <script>
+      function openUpdateForm() {
+        document.getElementById("myUpdateForm").style.display = "block";
+        document.getElementById("myAddForm").style.display = "none";
+        document.getElementById("myDeleteForm").style.display = "none";
+      }
+
+      function closeUpdateForm() {
+        document.getElementById("myUpdateForm").style.display = "none";
+      }
+
+      function openAddForm() {
+        document.getElementById("myUpdateForm").style.display = "none";
+        document.getElementById("myAddForm").style.display = "block";
+        document.getElementById("myDeleteForm").style.display = "none";
+      }
+
+      function closeAddForm() {
+        document.getElementById("myAddForm").style.display = "none";
+      }
+      function openDeleteForm() {
+        document.getElementById("myUpdateForm").style.display = "none";
+        document.getElementById("myAddForm").style.display = "none";
+        document.getElementById("myDeleteForm").style.display = "block";
+      }
+
+      function closeDeleteForm() {
+        document.getElementById("myDeleteForm").style.display = "none";
+      }
+      </script>
+    </body>
+</html>

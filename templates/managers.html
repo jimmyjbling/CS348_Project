@@ -1,0 +1,187 @@
+<html>
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/main_page.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>BaGS</title>
+        <style>
+          .form-popup {
+            background-color: white;
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+        .form-container .cancel {
+            background-color: red;
+        }
+
+        </style>
+    </head>
+
+    <body>
+      <div class="topnav">
+        <a href="http://jimmyjbling.pythonanywhere.com/">Home</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/teams">Teams</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/players">Players</a>
+        <a class = "active" href="http://jimmyjbling.pythonanywhere.com/managers/">Managers</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/coaches/">Coaches</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/games/">Games</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/rooster/">Roosters</a>
+      </div>
+
+        <div class="container">
+          <h1>Add, Update or Delete a Manager</h1>
+          <h5>All the managers in the league can be found here. Manager info and stats can be edited using this page. The simulator takes manager win percentages as a metric to predict the result of a game.</h5>
+          <img src="https://cdn.vox-cdn.com/thumbor/EWAA0BG-zuz5G_rRR1VlNWf00HU=/0x0:3059x2123/1200x800/filters:focal(1848x898:2336x1386)/cdn.vox-cdn.com/uploads/chorus_image/image/65732202/1158921789.jpg.0.jpg"  class="img-fluid" alt="Responsive image">
+
+          <button type="button" class="btn btn-secondary" onclick="openUpdateForm()">Update Manager</button>
+          <button type="button" class="btn btn-primary" onclick="openAddForm()">Add New Manager</button>
+          <button type="button" class="btn btn-danger" onclick="openDeleteForm()">Delete Manager</button>
+
+
+        </div><!-- /.container -->
+
+        <div class="container" id="myUpdateForm" style="display: none">
+            <form action="" method="post" role="form" class="form-container">
+                <div class="form-group">
+                    <label for="manid">Manager ID:</label>
+                    <input type="text" class="form-control" id="manid" name="manid">
+
+                    <label for="name">Manaager name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+
+                <h3>Add manager to team (optional)</h3>
+                <p>Team:</p>
+                <select class="browser-default custom-select" id="team" name="team">
+                  <option value="" selected>Select team</option>
+                  {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                  {% endfor %}
+                </select>
+                <div class="form-group">
+                    <label for="salary">Salary:</label>
+                    <input type="text" class="form-control" id="salary" name="salary">
+                </div>
+                <div class="row">
+                    <p><br></p>
+                </div>
+
+                <div class="row">
+                    <button type="submit" class="btn btn-success" name="form_update" id="form_update">Update</button>
+                    <button type="button" class="btn cancel" onclick="closeUpdateForm()">Close</button>
+                </div>
+                </form>
+        </div><!-- /.container -->
+
+        <div class="container" id="myAddForm" style="display: none">
+
+            <form action="" method="post" role="form" class="form-container">
+                <div class="form-group">
+                    <label for="name">Manager name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+
+                <h3>Add manager to team (optional)</h3>
+                <p>Team:</p>
+                <select class="browser-default custom-select" id="team" name="team">
+                  <option value="" selected>Select team</option>
+                  {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                  {% endfor %}
+                </select>
+                <div class="form-group">
+                    <label for="salary">Salary:</label>
+                    <input type="text" class="form-control" id="salary" name="salary">
+                </div>
+                <div class="row">
+                    <p><br></p>
+                </div>
+
+                <div class="row">
+                    <button type="submit" class="btn btn-success" name="form_add" id="form_add">Add</button>
+                    <button type="button" class="btn cancel" onclick="closeAddForm()">Close</button>
+                </div>
+                </form>
+
+      </div><!-- /.container -->
+      <div class="container" id="myDeleteForm" style="display: none">
+
+        <form action="" method="post" role="form" class="form-container">
+            <div class="form-group">
+                <label for="manid">Manager ID:</label>
+                <input type="text" class="form-control" id="manid" name="manid">
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-success" name="form_remove" id="form_remove">Delete</button>
+                <button type="button" class="btn cancel" onclick="closeDeleteForm()">Close</button>
+            </div>
+            </form>
+
+    </div><!-- /.container -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+
+              {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-danger">
+                <strong></strong> {{ message[1] }}
+                </div>
+            {% endif %}
+              {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    <script>
+      function openUpdateForm() {
+        document.getElementById("myUpdateForm").style.display = "block";
+        document.getElementById("myAddForm").style.display = "none";
+        document.getElementById("myDeleteForm").style.display = "none";
+      }
+
+      function closeUpdateForm() {
+        document.getElementById("myUpdateForm").style.display = "none";
+      }
+
+      function openAddForm() {
+        document.getElementById("myUpdateForm").style.display = "none";
+        document.getElementById("myAddForm").style.display = "block";
+        document.getElementById("myDeleteForm").style.display = "none";
+      }
+
+      function closeAddForm() {
+        document.getElementById("myAddForm").style.display = "none";
+      }
+      function openDeleteForm() {
+        document.getElementById("myUpdateForm").style.display = "none";
+        document.getElementById("myAddForm").style.display = "none";
+        document.getElementById("myDeleteForm").style.display = "block";
+      }
+
+      function closeDeleteForm() {
+        document.getElementById("myDeleteForm").style.display = "none";
+      }
+      </script>
+    </body>
+</html>
