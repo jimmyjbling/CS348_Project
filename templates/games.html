@@ -48,6 +48,9 @@
         <a href="http://jimmyjbling.pythonanywhere.com/coaches/">Coaches</a>
         <a class="active" href="http://jimmyjbling.pythonanywhere.com/games/">Games</a>
         <a href="http://jimmyjbling.pythonanywhere.com/rooster/">Roosters</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/gamedata/">Search Games</a>
+                <a href="http://jimmyjbling.pythonanywhere.com/playerdata/">Player Stats</a>
+                <a href="http://jimmyjbling.pythonanywhere.com/simgame/">Simulate Game</a>
       </div>
 
         <div class="container">
@@ -58,6 +61,9 @@
           <button type="button" class="btn btn-secondary" onclick="openUpdateForm()">Update Game Scores</button>
           <button type="button" class="btn btn-primary" onclick="openAddForm()">Add Game</button>
           <button type="button" class="btn btn-danger" onclick="openDeleteForm()">Delete Game</button>
+          <form action="" method="post" role="form" class="form-container">
+               <button type="submit" class="btn btn-success" name="rooster" id="rooster">See All Games</button>
+          </form>
 
           <div class="container" id="myUpdateForm" style="display: none">
               <p>You cannot update the player or date of a game, just scores/locations. To change the date, add a new game with that date and delete the old one</p>
@@ -80,11 +86,11 @@
                   <label for="date">Date:</label>
                   <input type="date" class="form-control" id="date" name="date">
 
-                  <label for="score">Score:</label>
-                  <input type="text" class="form-control" id="score" name="score">
+                  <label for="score1">Score 1:</label>
+                  <input type="text" class="form-control" id="score1" name="score1">
 
-                  <label for="winner">Winner:</label>
-                  <input type="text" class="form-control" id="winner" name="winner">
+                  <label for="score2">Score 2:</label>
+                  <input type="text" class="form-control" id="score2" name="score2">
 
                   <label for="location">Location:</label>
                   <input type="text" class="form-control" id="location" name="location">
@@ -116,10 +122,10 @@
                   {% endfor %}
                 </select>
               <div class="form-group">
-                <label for="score">Team 1 Score:</label>
+                <label for="score 1">Team 1 Score:</label>
                 <input type="text" class="form-control" id="score1" name="score1">
 
-                <label for="winner">Team 2 Score:</label>
+                <label for="score 2">Team 2 Score:</label>
                 <input type="text" class="form-control" id="score2" name="score2">
 
                 <label for="location">Location:</label>
@@ -141,6 +147,7 @@
       <div class="container" id="myDeleteForm" style="display: none">
 
         <form action="" method="post" role="form" class="form-container">
+            <p>Deleting a game will not change the number of games played by player of the team, just remove it from our list</p>
             <p>Team1 ID:</p>
             <select class="browser-default custom-select" id="team1id" name="team1id">
               <option value="" selected>Select team</option>

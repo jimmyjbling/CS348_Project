@@ -1,6 +1,5 @@
+<!doctype html>
 <html>
-
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,7 +28,6 @@
           .form-container .cancel {
             background-color: red;
         }
-
         </style>
     </head>
 
@@ -41,32 +39,14 @@
         <a href="http://jimmyjbling.pythonanywhere.com/managers/">Managers</a>
         <a href="http://jimmyjbling.pythonanywhere.com/coaches/">Coaches</a>
         <a href="http://jimmyjbling.pythonanywhere.com/games/">Games</a>
-        <a class="active" href="http://jimmyjbling.pythonanywhere.com/rooster/">Roosters</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/rooster/">Roosters</a>
         <a href="http://jimmyjbling.pythonanywhere.com/gamedata/">Search Games</a>
                 <a href="http://jimmyjbling.pythonanywhere.com/playerdata/">Player Stats</a>
                 <a href="http://jimmyjbling.pythonanywhere.com/simgame/">Simulate Game</a>
       </div>
-
-        <div class="container">
-          <h1>View team roosters</h1>
-          <h5> View the rundown on all the teams in the league.</h5>
-
-
-        </div><!-- /.container -->
-
-        <div class="container" id="whichteam">
-            <form action="" method="post" role="form" class="form-container">
-                <p>Team ID:</p>
-                <select class="browser-default custom-select" id="teamid" name="teamid">
-                  <option value="" selected>Select team</option>
-                  {% for team in teams %}
-                    <option value="{{ team }}">{{ team }}</option>
-                  {% endfor %}
-                </select>
-                    <button type="submit" class="btn btn-success" name="rooster" id="rooster">Get Rooster</button>
-                </div>
-                </form>
-                </div>
-        </div><!-- /.container -->
-    </body>
-</html>
+<div class=page>
+  {% for table in tables %}
+    <h2>{{titles[loop.index]}}</h2>
+    {{ table|safe }}
+  {% endfor %}
+</div>

@@ -1,0 +1,91 @@
+<html>
+
+
+    <head>
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/main_page.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>BaGS</title>
+    </head>
+    </head>
+
+    <body>
+
+      <div class="topnav">
+        <a href="http://jimmyjbling.pythonanywhere.com/">Home</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/teams/">Teams</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/players/">Players</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/managers/">Managers</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/coaches/">Coaches</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/games/">Games</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/rooster/">Roosters</a>
+        <a class="active" href="http://jimmyjbling.pythonanywhere.com/simgame/">Simulate Game</a>
+        <a href="http://jimmyjbling.pythonanywhere.com/gamedata/">Search Games</a>
+                <a href="http://jimmyjbling.pythonanywhere.com/playerdata/">Player Stats</a>
+      </div>
+
+        <div class="container">
+
+
+        <form action="" method="post" role="form" class="form-container">
+            <h3>Pick two team to play a game, and the date they are to play the game. Two teams cannot play more than 1 game against each other on any given date</h3>
+            <p>Team1 ID:</p>
+            <select class="browser-default custom-select" id="team1id" name="team1id">
+              <option value="" selected>Select team</option>
+              {% for team in teams %}
+                <option value="{{ team }}">{{ team }}</option>
+              {% endfor %}
+            </select>
+            <p>Team2 ID:</p>
+            <select class="browser-default custom-select" id="team2id" name="team2id">
+              <option value="" selected>Select team</option>
+              {% for team in teams %}
+                <option value="{{ team }}">{{ team }}</option>
+              {% endfor %}
+            </select>
+            <label for="date">Date:</label>
+            <input type="date" class="form-control" id="date" name="date">
+            <p>Add this game to database?</p>
+                <select class="browser-default custom-select" id="addit" name="addit">
+                  <option value="0" selected>No</option>
+                  <option value="1">Yes</option>
+
+                </select>
+                <button type="submit" class="btn btn-success" name="go" id="go">GO!</button>
+            </form>
+            </div>
+
+    </div><!-- /.container -->
+        </div><!-- /.container -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+
+              {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-danger">
+                <strong></strong> {{ message[1] }}
+                </div>
+            {% endif %}
+              {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    </body>
+</html>
